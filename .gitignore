@@ -1,0 +1,39 @@
+# Django
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+db.sqlite3
+*.log
+
+# Entorno virtual
+venv/
+env/
+.venv/
+ENV/
+
+# Variables de entorno (¡NUNCA subir!)
+.env
+.env.local
+.env.production
+
+# Archivos estáticos recolectados
+staticfiles/
+
+# Media uploads (desarrollo)
+media/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Distribución / Packaging
+*.egg-info/
+dist/
+build/

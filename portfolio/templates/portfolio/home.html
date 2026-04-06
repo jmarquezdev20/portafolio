@@ -1,0 +1,475 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}{{ developer.name }} | Backend Developer{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'portfolio/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-blob hero-blob--1"></div>
+  <div class="hero-blob hero-blob--2"></div>
+
+  <div class="hero-container">
+    <div>
+      <div class="hero-eyebrow">
+        {% if developer.available %}
+          <span class="badge-pulse"></span> Disponible para trabajar
+        {% else %}
+          No disponible actualmente
+        {% endif %}
+      </div>
+
+      <h1 class="hero-name">
+        Backend Developer enfocado en el desarrollo de APIs REST con Python y Django<br>
+        <em>{{ developer.name }}</em>
+      </h1>
+
+      <p class="hero-role">Desarrollador backend enfocado en el desarrollo de APIs REST escalables con Django REST Framework</p>
+
+      <p class="hero-desc">
+        He desarrollado un sistema backend que <strong>automatiza inventario, envíos y facturación</strong>, reduciendo procesos manuales y mejorando la eficiencia operativa. Implementé más de <strong>500 pruebas automatizadas</strong> — incluyendo pruebas unitarias e integración — para garantizar la calidad del sistema.
+      </p>
+
+      <p class="hero-desc">
+        🎓 Estudiante de Ingeniería de Sistemas (9º semestre) ·
+        <strong>Disponible para incorporarme como Backend Developer y aportar desde el primer día.</strong>
+      </p>
+
+      <div class="hero-stack-block">
+        <div class="stack-block-label">Stack principal</div>
+        <div class="stack-block-items">
+          <div class="stack-item"><span class="stack-item-icon">🐍</span><span>Python</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🌐</span><span>Django</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🌐</span><span>Django REST Framework</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🗄️</span><span>PostgreSQL</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🗄️</span><span>MySQL</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🔌</span><span>REST APIs</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🐳</span><span>Docker</span></div>
+          <div class="stack-item"><span class="stack-item-icon">🔧</span><span>Git</span></div>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn--primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+          Ver Proyectos
+        </a>
+        <a href="{% static 'portfolio/cv.pdf' %}" class="btn btn--outline" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar CV
+        </a>
+        <a href="#contact" class="btn btn--ghost">Contactar →</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-avatar">
+          <img src="{% static 'img/profile.jpg' %}" alt="{{ developer.name }}" loading="lazy">
+        </div>
+        <div class="hero-card-name">Backend Developer</div>
+        <div class="hero-card-role">Backend Developer · Python</div>
+        <div class="hero-card-divider"></div>
+        <div class="hero-card-stats">
+          <div class="card-stat">
+            {% if projects %}
+              <span class="card-stat-num">{{ projects|length }}</span>
+              <span class="card-stat-lbl">Proyectos</span>
+            {% else %}
+              <span class="card-stat-num">9°</span>
+              <span class="card-stat-lbl">Semestre</span>
+            {% endif %}
+          </div>
+          <div class="card-stat">
+            <span class="card-stat-num">+500</span>
+            <span class="card-stat-lbl">Tests automatizados</span>
+          </div>
+          <div class="card-stat">
+            <span class="card-stat-lbl">Sistema backend con lógica real de negocio</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// about_me</span>
+      <h2 class="section-title">Sobre <em>Mí</em></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal reveal-d1">
+        <p>
+          Soy estudiante de <strong>Ingeniería de Sistemas (9º semestre)</strong> enfocado en
+          desarrollo backend con Python y Django.
+        </p>
+        <p>
+          Me interesa construir sistemas bien estructurados, con <strong>lógica de negocio clara, manejo correcto de datos y APIs mantenibles</strong>.
+        </p>
+        <p>
+          He desarrollado proyectos personales donde implemento lógica de negocio para sistemas de inventario, envíos y facturación, además de pruebas automatizadas para garantizar la calidad del código.
+        </p>
+        <p>
+          Actualmente busco incorporarme como Backend Developer donde pueda aportar valor y seguir creciendo profesionalmente.
+        </p>
+      </div>
+      <div class="about-sidebar reveal reveal-d2">
+        <div class="info-card">
+          <div class="info-card-ttl">// info_personal</div>
+          <div class="info-row">
+            <span class="info-k">Ubicación</span>
+            <span class="info-v">{{ developer.location }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-k">Email</span>
+            <span class="info-v"><a href="mailto:{{ developer.email }}">{{ developer.email }}</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-k">GitHub</span>
+            <span class="info-v"><a href="{{ developer.github }}" target="_blank" rel="noopener noreferrer">Ver perfil →</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-k">LinkedIn</span>
+            <span class="info-v"><a href="{{ developer.linkedin }}" target="_blank" rel="noopener noreferrer">Ver perfil →</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-k">Inglés</span>
+            <span class="info-v">{{ developer.english_level|default:"Básico (A2)" }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-k">Estado</span>
+            <span class="info-v">
+              {% if developer.available %}<span class="avail-dot">Disponible</span>{% else %}No disponible{% endif %}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- SKILLS -->
+<section class="section section--alt" id="skills">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// skills</span>
+      <h2 class="section-title">Mis <em>Habilidades</em></h2>
+      <p class="section-subtitle">Tecnologías con las que trabajo</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal reveal-d1">
+        <div class="skill-card-hd"><div class="skill-card-ico">⚙️</div><h3>Backend</h3></div>
+        <div class="skill-tags-list">
+          <span class="skill-tag">🐍 Python</span>
+          <span class="skill-tag">🌐 Django</span>
+          <span class="skill-tag">🔌 Django REST Framework</span>
+          <span class="skill-tag">🔗 Diseño de APIs REST</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-d2">
+        <div class="skill-card-hd"><div class="skill-card-ico">🗄️</div><h3>Bases de Datos</h3></div>
+        <div class="skill-tags-list">
+          <span class="skill-tag">🐘 PostgreSQL</span>
+          <span class="skill-tag">🐬 MySQL</span>
+          <span class="skill-tag">💾 SQLite</span>
+          <span class="skill-tag">🔍 Consultas SQL (JOINs, subconsultas)</span>
+          <span class="skill-tag">📊 Modelado relacional y normalización</span>
+          <span class="skill-tag">⚙️ Vistas y procedimientos almacenados</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-d1">
+        <div class="skill-card-hd"><div class="skill-card-ico">🛠️</div><h3>Herramientas</h3></div>
+        <div class="skill-tags-list">
+          <span class="skill-tag">🔧 Git / GitHub</span>
+          <span class="skill-tag">🐳 Docker</span>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-d2">
+        <div class="skill-card-hd"><div class="skill-card-ico">🧠</div><h3>Buenas Prácticas</h3></div>
+        <div class="skill-tags-list">
+          <span class="skill-tag">🏗️ Organización por capas (views, serializers, services)</span>
+          <span class="skill-tag">🔐 Autenticación JWT</span>
+          <span class="skill-tag">📐 Diseño de APIs</span>
+          <span class="skill-tag">⚡ Testing unitario e integración</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// projects</span>
+      <h2 class="section-title">Mis <em>Proyectos</em></h2>
+      <p class="section-subtitle">Trabajos reales construidos con Django y Python</p>
+    </div>
+    {% if projects %}
+    <div class="projects-filter">
+      <button class="filter-btn active" data-filter="all" aria-label="Mostrar todos los proyectos">Todos</button>
+      <button class="filter-btn" data-filter="backend" aria-label="Filtrar proyectos Backend">Backend</button>
+      <button class="filter-btn" data-filter="api" aria-label="Filtrar proyectos API REST">API / REST</button>
+      <button class="filter-btn" data-filter="database" aria-label="Filtrar proyectos Base de Datos">Base de Datos</button>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
+      {% for project in projects %}
+      <article class="project-card reveal" data-category="{{ project.category }}">
+        <div class="project-img">
+          {% if project.image %}
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy"/>
+          {% else %}
+            <div class="project-placeholder">
+              <span class="ph-icon">⚡</span>
+              <span class="ph-label">{{ project.get_category_display }}</span>
+            </div>
+          {% endif %}
+          {% if project.featured %}<span class="project-badge">⭐ Destacado</span>{% endif %}
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-cat">{{ project.get_category_display }}</span>
+            <span class="project-yr">{{ project.created_at|date:"Y" }}</span>
+          </div>
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="project-desc">
+            {% if project.short_description %}{{ project.short_description }}
+            {% else %}{{ project.description }}{% endif %}
+          </p>
+          <div class="project-techs">
+            {% for tech in project.get_technologies_list %}<span class="tech-pill">{{ tech }}</span>{% endfor %}
+          </div>
+          <div class="project-links">
+            {% if project.demo_url %}
+            <a href="{{ project.demo_url }}" target="_blank" rel="noopener noreferrer" class="project-link project-link--primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Demo
+            </a>
+            {% endif %}
+            {% if project.github_url %}
+            <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="project-link project-link--ghost">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              GitHub
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align:center;padding:5rem 0;color:var(--text-3);">
+      <div style="font-size:3.5rem;margin-bottom:1.2rem;">📂</div>
+      <h3 style="color:var(--text-2);font-family:var(--ff-display);font-weight:400;font-size:1.6rem;margin-bottom:.6rem;">Proyectos en camino</h3>
+      <p style="font-size:.95rem;">Agrega proyectos desde el <a href="/admin/portfolio/project/add/" style="color:var(--accent);font-weight:600;">panel admin →</a></p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- EDUCATION -->
+<section class="section section--alt" id="education">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// education</span>
+      <h2 class="section-title">Formación & <em>Experiencia</em></h2>
+    </div>
+    <div class="timeline">
+      {% for item in education %}
+      <div class="timeline-item reveal">
+        <div class="timeline-dot">{{ item.get_type_icon }}</div>
+        <div class="timeline-card">
+          <div class="timeline-top">
+            <div>
+              <h3 class="timeline-title">{{ item.title }}</h3>
+              <span class="timeline-institution">{{ item.institution }}</span>
+            </div>
+            <span class="timeline-period">{{ item.period }}</span>
+          </div>
+          {% if item.description %}<p class="timeline-desc">{{ item.description }}</p>{% endif %}
+          <div class="timeline-tags">
+            {% for tag in item.get_tags_list %}<span class="tag-sm">{{ tag }}</span>{% endfor %}
+          </div>
+          {% if item.certificate_pdf %}
+          <a href="{{ item.certificate_pdf.url }}" target="_blank" rel="noopener noreferrer" class="cert-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Ver certificado
+          </a>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <div style="text-align:center;padding:4rem 0;color:var(--text-3);">
+        <div style="font-size:3rem;margin-bottom:.8rem;">🎓</div>
+        <p style="font-size:.95rem;">Agrega tu formación desde el <a href="/admin/portfolio/education/add/" style="color:var(--accent);font-weight:600;">panel admin →</a></p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- ÁREAS DE ESPECIALIZACIÓN -->
+<section class="section" id="specialization">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// specialization</span>
+      <h2 class="section-title">Áreas de <em>Especialización</em></h2>
+      <p class="section-subtitle">Lo que sé hacer y en lo que me enfoco</p>
+    </div>
+    <div class="spec-grid reveal">
+      <div class="spec-card">
+        <div class="spec-icon">🔌</div>
+        <h3 class="spec-title">APIs REST con Django REST Framework</h3>
+        <p class="spec-desc">Desarrollo de APIs REST estructuradas con serializers, viewsets y routers, siguiendo buenas prácticas de diseño.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🗄️</div>
+        <h3 class="spec-title">Bases de Datos Relacionales</h3>
+        <p class="spec-desc">Diseño y modelado de bases de datos con PostgreSQL y MySQL, incluyendo consultas SQL, normalización y optimización.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🐳</div>
+        <h3 class="spec-title">Contenerización con Docker</h3>
+        <p class="spec-desc">Configuración de entornos de desarrollo y despliegue de aplicaciones backend usando Docker y Docker Compose.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">✨</div>
+        <h3 class="spec-title">Desarrollo Backend con Python</h3>
+        <p class="spec-desc">Construcción de lógica de negocio para sistemas backend, manejo de datos y desarrollo de funcionalidades escalables.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🔐</div>
+        <h3 class="spec-title">Autenticación y Seguridad</h3>
+        <p class="spec-desc">Implementación de autenticación con JWT y control de roles para gestión de acceso en aplicaciones.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🔧</div>
+        <h3 class="spec-title">Control de Versiones con Git</h3>
+        <p class="spec-desc">Uso de Git y GitHub para control de versiones, manejo de ramas y colaboración en proyectos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"></div>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">// contact</span>
+      <h2 class="section-title">Hablemos <em>juntos</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <h3 class="contact-headline">¿Buscas un Backend Developer?</h3>
+        <div class="contact-channels">
+          <a href="mailto:{{ developer.email }}" class="channel-card">
+            <div class="channel-ico">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <span class="channel-lbl">Email</span>
+              <span class="channel-val">{{ developer.email }}</span>
+            </div>
+            <span class="channel-arrow">→</span>
+          </a>
+          <a href="{{ developer.github }}" target="_blank" rel="noopener noreferrer" class="channel-card">
+            <div class="channel-ico">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </div>
+            <div>
+              <span class="channel-lbl">GitHub</span>
+              <span class="channel-val">Ver repositorios →</span>
+            </div>
+            <span class="channel-arrow">→</span>
+          </a>
+          <a href="{{ developer.linkedin }}" target="_blank" rel="noopener noreferrer" class="channel-card">
+            <div class="channel-ico">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </div>
+            <div>
+              <span class="channel-lbl">LinkedIn</span>
+              <span class="channel-val">Ver perfil profesional →</span>
+            </div>
+            <span class="channel-arrow">→</span>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right">
+        <div class="avail-card">
+          <div class="avail-ttl">// disponibilidad_actual</div>
+          <div class="avail-status">
+            <div class="avail-pulse"></div>
+            <span class="avail-txt">
+              {% if developer.available %}Disponible para empleo inmediato{% else %}No disponible actualmente{% endif %}
+            </span>
+          </div>
+          <p class="avail-desc">
+          Disponible para incorporarme como Backend Developer y aportar valor desde el primer día.
+          </p>
+        </div>
+        <div class="resp-card">
+          <div class="resp-ttl">// detalles</div>
+          <div class="resp-rows">
+            <div class="resp-row"><span class="resp-lbl">Modalidad</span><span class="resp-val">Remoto / Híbrido</span></div>
+            <div class="resp-row"><span class="resp-lbl">Tipo</span><span class="resp-val">Tiempo completo</span></div>
+            <div class="resp-row"><span class="resp-lbl">Disponibilidad</span><span class="resp-val">Inmediata</span></div>
+            <div class="resp-row"><span class="resp-lbl">Idiomas</span><span class="resp-val">ES · EN (A2)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const skillObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.width + '%';
+        skillObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.skill-fill').forEach(el => skillObs.observe(el));
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.project-card').forEach(card => {
+        card.style.display = (f === 'all' || card.dataset.category === f) ? '' : 'none';
+      });
+    });
+  });
+</script>
+{% endblock %}
