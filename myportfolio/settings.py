@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',   # ← ACTIVADO (después de SecurityMiddleware)
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,8 +74,6 @@ WSGI_APPLICATION = 'myportfolio.wsgi.application'
 
 # ─────────────────────────────────────────────
 # Base de datos
-# En producción (Render) se inyecta DATABASE_URL automáticamente.
-# En desarrollo usa SQLite.
 # ─────────────────────────────────────────────
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
@@ -126,9 +124,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Media — Cloudinary en producción, local en dev
 # ─────────────────────────────────────────────
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', ''),
-    'API_KEY':    os.environ.get('CLOUDINARY_API_KEY', ''),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', ''),
+    'CLOUD_NAME':  os.environ.get('CLOUDINARY_CLOUD_NAME', ''),
+    'API_KEY':     os.environ.get('CLOUDINARY_API_KEY', ''),
+    'API_SECRET':  os.environ.get('CLOUDINARY_API_SECRET', ''),
+    'ACCESS_MODE': 'public',   # ← fuerza archivos públicos (fix certificados 401)
 }
 
 if os.environ.get('CLOUDINARY_CLOUD_NAME'):
@@ -167,7 +166,6 @@ if not DEBUG:
     SECURE_SSL_REDIRECT              = True
     SESSION_COOKIE_SECURE            = True
     CSRF_COOKIE_SECURE               = True
-    # Render pone el dominio en RENDER_EXTERNAL_HOSTNAME
     RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
     if RENDER_EXTERNAL_HOSTNAME:
         ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
